@@ -1,4 +1,4 @@
-package com.dylanz666.autoframework;
+package com.github.dylanz666;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
