@@ -41,11 +41,18 @@
         </developer>
     </developers>
     <!--  For downloading jar  -->
-    <repositories>
+    <!--<repositories>
         <repository>
             <id>central</id>
             <name>Central Repository</name>
             <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+    </repositories>-->
+    <repositories>
+        <repository>
+            <id>alimaven</id>
+            <name>aliyun maven</name>
+            <url>http://maven.aliyun.com/nexus/content/repositories/central/</url>
         </repository>
     </repositories>
     <!--  For pushing jar  -->
