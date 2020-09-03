@@ -1,14 +1,9 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite" verbose="1" parallel="classes" thread-count="10">
-    <test name="Test">
-        <packages>
-            <package name="com.github.dylanz666.*"/>
-        </packages>
-    </test>
     <listeners>
-        <!--        <listener class-name="common.util.Listener.AlterSuiteListener"/>-->
-        <!--        <listener class-name="com.github.dylanz666.util.listener.SkipAnnotationListener"/>-->
+        <listener class-name="com.github.dylanz666.util.listener.AlterSuiteListener"/>
+<!--        <listener class-name="com.github.dylanz666.util.listener.SkipAnnotationListener"/>-->
         <listener class-name="com.github.dylanz666.util.listener.TestListener"/>
     </listeners>
 </suite>
