@@ -5,6 +5,7 @@ import com.github.dylanz666.constant.MethodEnum;
 import com.github.dylanz666.controller.RequestController;
 import com.github.dylanz666.domain.RequestSpec;
 import com.github.dylanz666.util.AssertUtil;
+import com.github.dylanz666.util.annotation.Skip;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.restassured.response.Response;

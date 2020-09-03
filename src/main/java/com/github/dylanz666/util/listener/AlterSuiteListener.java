@@ -1,7 +1,9 @@
 package com.github.dylanz666.util.listener;
 
+import com.github.dylanz666.App;
 import com.github.dylanz666.util.base.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.testng.IAlterSuiteListener;
 import org.testng.xml.*;
 
@@ -11,15 +13,18 @@ import java.util.List;
 
 /**
  * @author : dylanz
- * @since : 08/05/2020
- **/
+ * @since : 09/03/2020
+ */
 public class AlterSuiteListener implements IAlterSuiteListener {
+    private String groupId = "com.github.dylanz666";
+    private String rootPath = groupId.replaceAll("\\.", "\\\\");
+
     @Autowired
     private FileUtil fileUtil;
 
     @Override
     public void alter(List<XmlSuite> suites) {
-        File file = new File(System.getProperty("user.dir") + "\\src\\test\\java\\com\\github\\dylanz666");
+        File file = new File(System.getProperty("user.dir") + "\\src\\test\\java\\" + rootPath);
         File[] files = file.listFiles();
 
         //delete test result files in allure-results folder
@@ -32,6 +37,8 @@ public class AlterSuiteListener implements IAlterSuiteListener {
 
         String groupTag = System.getProperty("tag");
         String suiteName = System.getProperty("suite");
+        String suitePath = groupId + "." + suiteName;
+        String packagePath = groupId + ".*";
 
         //run by group
         if (groupTag != null && !groupTag.equals("")) {
@@ -46,42 +53,39 @@ public class AlterSuiteListener implements IAlterSuiteListener {
 
             //run by package, this is for suite is ended with "*"
             if (!suiteName.equals("") && !suiteName.toLowerCase().equals("all") && suiteName.endsWith(".*")) {
-                XmlPackage xmlPackage = new XmlPackage("com.github.dylanz666." + suiteName);
+                XmlPackage xmlPackage = new XmlPackage(suitePath);
                 xmlTest.setPackages(Collections.singletonList(xmlPackage));
                 return;
             }
 
             //set class scope when both tag and suite have value
             if (!suiteName.equals("") && !suiteName.toLowerCase().equals("all")) {
-                suiteName = "com.github.dylanz666." + suiteName;
-                xmlClass.setName(suiteName);
+                xmlClass.setName(suitePath);
                 xmlTest.setClasses(Collections.singletonList(xmlClass));
                 return;
             }
 
             //set package scope
-            XmlPackage xmlPackage = new XmlPackage("com.github.dylanz666.*");
+            XmlPackage xmlPackage = new XmlPackage(packagePath);
             xmlTest.setPackages(Collections.singletonList(xmlPackage));
             return;
         }
 
         //run by package, this is for suite is ended with "*"
         if (suiteName != null && !suiteName.equals("") && !suiteName.toLowerCase().equals("all") && suiteName.endsWith(".*")) {
-            XmlPackage xmlPackage = new XmlPackage("com.github.dylanz666." + suiteName);
+            XmlPackage xmlPackage = new XmlPackage(suitePath);
             xmlTest.setPackages(Collections.singletonList(xmlPackage));
             return;
         }
 
         //run by classes, this is for groupTag is null or ""
         if (suiteName != null && !suiteName.equals("") && !suiteName.toLowerCase().equals("all")) {
-            suiteName = "com.github.dylanz666." + suiteName;
-            xmlClass.setName(suiteName);
+            xmlClass.setName(suitePath);
             xmlTest.setClasses(Collections.singletonList(xmlClass));
-            return;
         }
 
         //default run by package
-        XmlPackage xmlPackage = new XmlPackage("com.github.dylanz666.*");
+        XmlPackage xmlPackage = new XmlPackage(packagePath);
         xmlTest.setPackages(Collections.singletonList(xmlPackage));
     }
 }
