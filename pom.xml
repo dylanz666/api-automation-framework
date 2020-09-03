@@ -4,7 +4,7 @@
     <groupId>com.github.dylanz666</groupId>
     <artifactId>api-automation-framework</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0</version>
+    <version>1.0-SNAPSHOT</version>
     <name>api-automation-framework</name>
     <url>https://github.com/dylanz666/api-automation-framework</url>
     <properties>
@@ -12,6 +12,11 @@
         <fastjson.version>1.2.72</fastjson.version>
         <rest.assured.version>4.2.0</rest.assured.version>
         <maven.gpg.plugin>1.6</maven.gpg.plugin>
+        <testng.version>7.0.0</testng.version>
+        <allure.version>2.13.0</allure.version>
+        <aspectj.version>1.9.4</aspectj.version>
+        <api.automation.core>1.0.2</api.automation.core>
+        <api.automation.service>1.0.3</api.automation.service>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -20,34 +25,7 @@
         <relativePath/>
     </parent>
 
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-    <scm>
-        <tag>master</tag>
-        <url>https://github.com/dylanz666/api-automation-framework.git</url>
-        <connection>scm:git:git@github.com:dylanz666/api-automation-framework.git</connection>
-        <developerConnection>scm:git:git@github.com:dylanz666/api-automation-framework.git</developerConnection>
-    </scm>
-    <developers>
-        <developer>
-            <name>dylanz</name>
-            <email>997604787@qq.com</email>
-            <organization>dylanz</organization>
-        </developer>
-    </developers>
     <!--  For downloading jar  -->
-    <!--<repositories>
-        <repository>
-            <id>central</id>
-            <name>Central Repository</name>
-            <url>https://repo.maven.apache.org/maven2</url>
-        </repository>
-    </repositories>-->
     <repositories>
         <repository>
             <id>alimaven</id>
@@ -55,64 +33,14 @@
             <url>http://maven.aliyun.com/nexus/content/repositories/central/</url>
         </repository>
     </repositories>
-    <!--  For pushing jar  -->
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>2.2.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.9.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.5</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
 
     <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -122,9 +50,14 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -149,9 +82,19 @@
             <version>${rest.assured.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <version>${maven.gpg.plugin}</version>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.dylanz666</groupId>
+            <artifactId>api-automation-core</artifactId>
+            <version>${api.automation.core}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.dylanz666</groupId>
+            <artifactId>api-automation-service</artifactId>
+            <version>${api.automation.service}</version>
         </dependency>
     </dependencies>
 </project>
