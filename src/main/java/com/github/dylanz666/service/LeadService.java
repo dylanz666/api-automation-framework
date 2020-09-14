@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
  * @since : 09/11/2020
  */
 @Service
+@DS(value = "oracle")
 public class LeadService {
     @Autowired
     private LeadDAO leadDAO;
 
-    @DS(value = "oracle")
     public Lead getLeadByLeadId(Long leadId) {
         return leadDAO.getLeadByLeadId(leadId);
     }

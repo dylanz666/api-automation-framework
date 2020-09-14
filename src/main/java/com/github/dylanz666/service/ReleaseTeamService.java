@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
  * @since : 09/11/2020
  */
 @Service
+@DS(value = "mysql")
 public class ReleaseTeamService {
     @Autowired
     private ReleaseTeamDAO releaseTeamDAO;
 
-    @DS(value = "mysql")
     public ReleaseTeam getReleaseTeamById(int id) {
         return releaseTeamDAO.getReleaseTeamById(id);
     }
